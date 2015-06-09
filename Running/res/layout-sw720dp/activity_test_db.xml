@@ -1,0 +1,87 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.runningchallenge.TestDBActivity" >
+
+    <EditText
+        android:id="@+id/editTextLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/editTextFirstName"
+        android:layout_marginTop="32dp"
+        android:ems="10" />
+
+    <EditText
+        android:id="@+id/editTextFirstName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editText2"
+        android:layout_alignParentTop="true"
+        android:ems="10" />
+
+    <Button
+        android:id="@+id/buttonAddData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="115dp"
+        android:text="Button" />
+
+    <EditText
+        android:id="@+id/editTextHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/buttonAddData"
+        android:layout_alignLeft="@+id/editTextWeight"
+        android:layout_marginBottom="51dp"
+        android:ems="10"
+        android:inputType="number" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/editTextWeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/editTextHeight"
+        android:layout_alignLeft="@+id/radioButtonFemme"
+        android:layout_marginBottom="61dp"
+        android:layout_marginLeft="53dp"
+        android:ems="10"
+        android:inputType="number" />
+
+    <RadioButton
+        android:id="@+id/radioButtonFemme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/editTextLastName"
+        android:layout_centerVertical="true"
+        android:text="Femme" />
+
+    <RadioButton
+        android:id="@+id/radioButtonHomme"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radioButtonFemme"
+        android:layout_alignLeft="@+id/radioButtonFemme"
+        android:layout_marginBottom="29dp"
+        android:text="Homme" />
+
+    <Button
+        android:id="@+id/buttonBirth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/radioButtonHomme"
+        android:layout_alignRight="@+id/editTextLastName"
+        android:layout_marginBottom="132dp"
+        android:layout_marginRight="59dp"
+        android:text="Birth" />
+
+</RelativeLayout>

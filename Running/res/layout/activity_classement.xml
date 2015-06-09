@@ -1,0 +1,155 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg"
+    tools:context="${relativePackage}.${activityClass}" >
+    
+    
+
+    <ImageView
+        android:id="@+id/imageView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:src="@drawable/buttom" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="58dp"
+        android:src="@drawable/champ" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+      
+        android:src="@drawable/champ" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        
+        android:src="@drawable/champ" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="41dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/classement" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/imageView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="79dp"
+        android:src="@drawable/classement" />
+      <TextView
+        android:id="@+id/textClassementTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView1"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_alignRight="@+id/imageView1"
+        android:layout_alignTop="@+id/imageView1"
+        android:layout_margin="1dp"
+        android:gravity="center"
+        android:text="Classement"
+        android:textColor="@color/text" />
+      <TextView
+        android:id="@+id/gagnant1Text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_alignRight="@+id/imageView2"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_margin="1dp"
+        android:gravity="center"
+        
+        android:textColor="@color/textChonometer" />
+
+      <TextView
+          android:id="@+id/gagnant2Text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/imageView3"
+          android:layout_alignLeft="@+id/imageView3"
+          android:layout_alignRight="@+id/imageView3"
+          android:layout_alignTop="@+id/imageView3"
+          android:layout_margin="1dp"
+          android:gravity="center"
+          android:textColor="@color/textChonometer" />
+
+      <TextView
+          android:id="@+id/gangnant3Text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/imageView4"
+          android:layout_alignLeft="@+id/imageView4"
+          android:layout_alignRight="@+id/imageView4"
+          android:layout_alignTop="@+id/imageView4"
+          android:layout_margin="1dp"
+          android:gravity="center"
+          android:textColor="@color/textChonometer" />
+
+      <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/gagnant1Text"
+        android:layout_alignBottom="@+id/gagnant1Text"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_marginLeft="17dp"
+        android:text="1er gagnant"
+        android:textColor="@color/textChonometer" />
+      <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/gagnant2Text"
+        android:layout_alignBottom="@+id/gagnant2Text"
+        android:layout_alignLeft="@+id/textView1"
+        android:text="2eme gagnant"
+        android:textColor="@color/textChonometer" />
+      <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/gangnant3Text"
+        android:layout_alignBottom="@+id/gangnant3Text"
+        android:layout_alignLeft="@+id/textView2"
+        android:text="3eme gagnant"
+        android:textColor="@color/textChonometer" />
+      <TextView
+        android:id="@+id/textClassement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView5"
+        android:layout_alignLeft="@+id/imageView5"
+        android:layout_alignRight="@+id/imageView5"
+        android:layout_alignTop="@+id/imageView5"
+        android:layout_margin="1dp"
+        android:gravity="center"
+        android:text="votre classement est : "
+        android:textColor="@color/text" />
+
+</RelativeLayout>

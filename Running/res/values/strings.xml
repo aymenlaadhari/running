@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RunningChallenge</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="facebook_app_id">1475783322660697</string>
+    <string name="title_activity_main_app">MainApp</string>
+    <string name="title_activity_pager">PagerActivity</string>
+    <string name="title_section1">Section 1</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="title_activity_map">MapActivity</string>
+    <string name="statistics">Statistics</string>
+    <string name="title_pedometer_activity">Pedometer</string>
+    <string name="classement">Déconnexion</string>
+    <string name="step_counter">android.hardware.sensor.stepcounter</string>
+    <string name="step_detector">android.hardware.sensor.stepdetector</string>
+    <string name="title_activity_result">ResultActivity</string>
+    <string name="title_activity_splash">SplashActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="custom_font">CustomFonts</string>
+    <string name="info">Waiting for GPS...</string>
+    <string name="about_menu_name">About</string>
+    <string name="about_message">Sample application to demostrate GPS in Android.\n\nVisit http://www.krvarma.com for more info.</string>
+    <string name="unit_km">Kilometer</string>
+    <string name="unit_miles">Miles</string>
+    <string name="setting_unit">Measurement Unit</string>
+
+    <string-array name="listOptions">
+        <item>Homme</item>
+        <item>Femme</item>
+    </string-array>
+    <string-array name="listValues">
+        <item>1 is selected</item>
+        <item>2 is selected</item>
+    </string-array>
+
+    <string name="title_activity_classement">ClassementActivity</string>
+    <string name="title_activity_se">SEActivity</string>
+    <string name="title_activity_set_preference">SetPreferenceActivity</string>
+    <string name="title_activity_test_pref">TestPrefActivity</string>
+    <string name="title_activity_preferences">PreferencesActivity</string>
+    <string name="title_activity_speed">SpeedActivity</string>
+    <string name="title_activity_test_db">TestDBActivity</string>
+    <string name="title_activity_ok">OkActivity</string>
+    <string name="api_key_twitter">N9vS8B72CwnjcnVW0d1yotN7v</string>
+    <string name="secret_api_twitter">ouJwcMOZ1zSertP84Q1wlsR1qmOMDmZmWiWZR7yAUMewpYT3tO</string>
+    <string name="title_activity_test_ws">TestWS</string>
+    <string name="title_activity_twitter">TwitterActivity</string>
+    <string name="title_activity_fraud">FraudActivity</string>
+
+</resources>

@@ -1,0 +1,97 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgtablet"
+    tools:context="${relativePackage}.${activityClass}" >
+
+        <fragment
+            android:id="@+id/mapResult"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="500dp" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/buttom" />
+
+    <ImageButton
+        android:id="@+id/imageSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="26dp"
+        android:src="@drawable/submitetablet7" 
+        android:background="@drawable/submitetablet7" />
+
+    <ImageView
+        android:id="@+id/Calories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/imageSubmit"
+        android:layout_alignTop="@+id/Vitesse"
+        android:layout_weight="0.40"
+        android:src="@drawable/caloriestablet7" />
+
+    <ImageView
+        android:id="@+id/Time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageSubmit"
+        android:layout_below="@+id/mapResult"
+        android:layout_marginTop="42dp"
+        android:layout_weight="0.39"
+        android:src="@drawable/timingtablet7" />
+
+    <ImageView
+        android:id="@+id/Vitesse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/Time"
+        android:layout_centerHorizontal="true"
+        android:layout_weight="0.98"
+        android:src="@drawable/vitessetablet7" />
+
+    <TextView
+        android:id="@+id/textSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textTime"
+        android:layout_alignBottom="@+id/textTime"
+        android:layout_centerHorizontal="true"
+         android:textColor="@color/text"
+        android:textSize="@dimen/abc_action_button_min_width_overflow_material" 
+        android:text="." />
+
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/Time"
+        android:layout_alignRight="@+id/Time"
+        android:layout_marginBottom="29dp"
+        android:layout_marginRight="30dp"
+        android:text="00.00"
+        android:textColor="@color/text"
+        android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+
+    <TextView
+        android:id="@+id/textCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textSpeed"
+        android:layout_alignBottom="@+id/textSpeed"
+        android:layout_alignRight="@+id/Calories"
+        android:layout_marginRight="20dp"
+        
+        android:text="."
+        android:textColor="@color/text"
+        android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+
+</RelativeLayout>

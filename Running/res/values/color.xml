@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="textChonometer">#ff5d00</color>
+    <color name="text">#ffffff</color>
+    <color name="black">#99000000</color> 
+</resources>

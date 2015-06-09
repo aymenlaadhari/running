@@ -1,0 +1,100 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:paddingBottom="3dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="40dip" >
+
+        <fragment
+            android:id="@+id/mapResult"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+    </TableRow>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/buttom" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/tableRow1"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/tempsxhdpi" />
+
+    <ImageView
+        android:id="@+id/ImageView01"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/vitessexhdpi" />
+
+    <ImageView
+        android:id="@+id/ImageView02"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/ImageView01"
+        android:layout_marginLeft="9dp"
+        android:layout_toRightOf="@+id/ImageView01"
+        android:src="@drawable/caloriesxhdpi" />
+
+    <ImageButton
+        android:id="@+id/imageSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="18dp"
+        android:background="@drawable/submit10" />
+
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="34dp"
+        android:text="00.00"
+        android:textColor="@color/text" />
+
+    <TextView
+        android:id="@+id/textSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textTime"
+        android:layout_alignBottom="@+id/textTime"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/text"
+        android:text="." />
+
+    <TextView
+        android:id="@+id/textCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textSpeed"
+        android:layout_alignBottom="@+id/textSpeed"
+        android:layout_toRightOf="@+id/imageView3"
+        android:text="."
+        android:textColor="@color/text" />
+
+</RelativeLayout>

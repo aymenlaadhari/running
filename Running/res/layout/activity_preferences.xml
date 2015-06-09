@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bgtablet"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <ImageView
+            android:id="@+id/ImageView07"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/ImageView10"
+            android:layout_alignTop="@+id/ImageView06"
+            android:src="@drawable/checkboxtablet7" />
+
+        <ImageView
+            android:id="@+id/ImageView05"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ImageView07"
+            android:layout_alignTop="@+id/ImageView04"
+            android:src="@drawable/checkboxtablet7" />
+
+        <ImageView
+            android:id="@+id/imageView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ImageView06"
+            android:layout_below="@+id/imageView3"
+            android:layout_marginTop="41dp"
+            android:src="@drawable/agetablet7" />
+
+        <ImageView
+            android:id="@+id/ImageView03"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ImageView05"
+            android:layout_alignTop="@+id/imageView4"
+            android:src="@drawable/checkboxtablet7" />
+
+        <ImageView
+            android:id="@+id/checkHomme"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView4"
+            android:layout_alignLeft="@+id/ImageView03"
+            android:layout_alignTop="@+id/ImageView01"
+            android:src="@drawable/checkboxtablet7" />
+
+        <ImageView
+            android:id="@+id/ImageView09"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView4"
+            android:layout_alignRight="@+id/checkHomme"
+            android:layout_alignTop="@+id/checkHomme"
+            android:src="@drawable/checkedtablet7"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/editPoid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ImageView07"
+            android:layout_alignTop="@+id/ImageView07"
+            android:layout_marginLeft="37dp"
+            android:layout_marginTop="29dp"
+            
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/textChonometer" />
+
+        <ImageView
+            android:id="@+id/imageView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_alignTop="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView2"
+            android:src="@drawable/checkboxtablet7" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageView01"
+            android:layout_alignLeft="@+id/ImageView01"
+            android:layout_marginBottom="21dp"
+            android:layout_marginLeft="24dp"
+            android:text="Homme"
+            android:textColor="@color/textChonometer"
+            android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/imageView4"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="105dp"
+            android:src="@drawable/gendertablet7" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageView04"
+            android:layout_alignLeft="@+id/ImageView04"
+            android:layout_marginLeft="57dp"
+            android:text="Taille(cm)"
+            android:textColor="@color/textChonometer"
+            android:visibility="invisible" />
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView5"
+            android:layout_alignBottom="@+id/textView5"
+            android:layout_alignLeft="@+id/imageView2"
+            android:layout_marginLeft="23dp"
+            android:text="Femme"
+            android:textColor="@color/textChonometer"
+            android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+
+        <ImageView
+            android:id="@+id/ImageView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="119dp"
+            android:src="@drawable/confirmertablet7" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ImageView10"
+            android:layout_alignTop="@+id/ImageView10"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Confirmer"
+            android:textColor="@color/text"
+            android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+
+        <ImageView
+            android:id="@+id/ImageView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView4"
+            android:layout_toRightOf="@+id/imageView3"
+            android:src="@drawable/gendertablet7" />
+
+        <ImageView
+            android:id="@+id/ImageView06"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ImageView10"
+            android:layout_centerVertical="true"
+            android:src="@drawable/agetablet7" />
+
+        <ImageView
+            android:id="@+id/ImageView04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/ImageView01"
+            android:layout_below="@+id/imageView4"
+            android:layout_marginTop="21dp"
+            android:src="@drawable/agetablet7" />
+
+        <TextView
+            android:id="@+id/editTaille"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView2"
+            android:layout_alignLeft="@+id/editPoid"
+            android:layout_marginBottom="21dp"
+            
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/textChonometer" />
+
+        <TextView
+            android:id="@+id/TextView01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/textView2"
+            android:layout_alignLeft="@+id/textView1"
+            android:text="Taille"
+            android:textColor="@color/textChonometer"
+            android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+
+        <TextView
+            android:id="@+id/editAge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView1"
+            android:layout_alignBottom="@+id/textView1"
+            android:layout_alignLeft="@+id/editTaille"
+           
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textColor="@color/textChonometer" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/TextView01"
+            android:layout_centerVertical="true"
+            android:text="Poids"
+            android:textColor="@color/textChonometer"
+            android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/textView3"
+            android:layout_alignTop="@+id/imageView4"
+            android:text="Age"
+            android:textColor="@color/textChonometer"
+            android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
+
+        <ImageView
+            android:id="@+id/ImageView08"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/imageView4"
+            android:layout_alignTop="@+id/imageView3"
+            android:layout_toRightOf="@+id/imageView2"
+            android:src="@drawable/checkedtablet7"
+            android:visibility="invisible" />
+    </RelativeLayout>
+
+</LinearLayout>

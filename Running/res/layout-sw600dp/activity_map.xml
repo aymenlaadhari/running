@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bgtablet"
+    android:orientation="vertical" >
+
+    <TableRow
+        android:layout_width="550dp"
+        android:layout_height="700dp"
+        android:layout_gravity="center"
+        android:paddingBottom="3dip"
+        android:paddingLeft="10dip"
+        android:paddingRight="10dip"
+        android:paddingTop="50dip" >
+
+        <fragment
+            android:id="@+id/map"
+            android:name="com.google.android.gms.maps.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="700dp" />
+    </TableRow>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <Button
+            android:id="@+id/off_btn"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="72dp"
+            android:background="@drawable/starttablet7"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/on_btn"
+            android:layout_width="300dp"
+            android:layout_height="40dp"
+            android:layout_alignLeft="@+id/off_btn"
+            android:layout_alignTop="@+id/off_btn"
+            android:background="@drawable/stoptablet7" />
+
+        <Chronometer
+            android:id="@+id/chronometer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginLeft="39dp"
+            android:layout_marginTop="26dp"
+            android:text="00:00" />
+
+        <TextView
+            android:id="@+id/textViewVitesse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/chronometer"
+            android:layout_alignBottom="@+id/chronometer"
+            android:layout_centerHorizontal="true"
+            android:text="@string/info"
+            android:visibility="invisible"
+            android:textColor="@color/text"
+            android:textSize="30dip" />
+
+    </RelativeLayout>
+
+</LinearLayout>

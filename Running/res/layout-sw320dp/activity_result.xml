@@ -1,0 +1,104 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg"
+    tools:context="${relativePackage}.${activityClass}" >
+
+    <fragment
+        android:id="@+id/mapResult"
+        android:name="com.google.android.gms.maps.MapFragment"
+        android:layout_width="match_parent"
+        android:layout_height="350dp" />
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/buttom" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView2"
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/imageView2"
+        android:src="@drawable/vitessexxhdpi" />
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView3"
+        android:layout_marginLeft="25dp"
+        android:layout_toRightOf="@+id/imageView3"
+        android:src="@drawable/caloriesxxhdpi" />
+
+    <TextView
+        android:id="@+id/textTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/imageView2"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_marginBottom="14dp"
+        android:layout_marginLeft="18dp"
+        android:text="Temps"
+        android:textColor="@color/text" />
+     <TextView
+            android:id="@+id/textSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/imageSubmit"
+            android:layout_alignLeft="@+id/imageSubmit"
+            android:layout_alignRight="@+id/imageSubmit"
+            android:layout_alignTop="@+id/imageSubmit"
+            android:layout_margin="1dp"
+            android:gravity="center"
+            android:text="Submit"
+            android:textColor="@color/text" />
+
+    <ImageButton
+        android:id="@+id/imageSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/imageView1"
+        android:layout_alignLeft="@+id/imageView2"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/champ_bottomxxhdpi" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/mapResult"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="22dp"
+        android:src="@drawable/timingxxhdpi" />
+
+    <TextView
+        android:id="@+id/textSpeed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textTime"
+        android:layout_alignBottom="@+id/textTime"
+        android:layout_centerHorizontal="true"
+        android:text="Vitesse"
+        android:textColor="@color/text" />
+
+    <TextView
+        android:id="@+id/textCalories"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textSpeed"
+        android:layout_alignBottom="@+id/textSpeed"
+        android:layout_alignLeft="@+id/imageView4"
+        android:layout_marginLeft="23dp"
+        android:text="Calories"
+        android:textColor="@color/text" />
+
+</RelativeLayout>
