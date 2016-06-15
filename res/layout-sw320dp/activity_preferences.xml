@@ -15,7 +15,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignLeft="@+id/ImageView05"
-            android:layout_marginRight="5dp"
             android:layout_alignTop="@+id/imageView4"
             android:src="@drawable/checkxhdpi" />
 
@@ -36,7 +35,7 @@
             android:layout_alignLeft="@+id/ImageView01"
             android:layout_marginBottom="15dp"
             android:layout_marginLeft="24dp"
-            android:text="Men"
+            android:text="Homme"
             android:textColor="@color/textChonometer"
            />
 
@@ -59,9 +58,19 @@
             android:layout_alignBottom="@+id/textView5"
             android:layout_alignLeft="@+id/imageView2"
             android:layout_marginLeft="23dp"
-            android:text="Women"
+            android:text="Femme"
             android:textColor="@color/textChonometer"
             />
+
+        <ImageView
+            android:id="@+id/ImageView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="119dp"
+            android:src="@drawable/champfbxhdpi" />
 
         <TextView
             android:id="@+id/textView4"
@@ -71,8 +80,7 @@
             android:layout_alignTop="@+id/ImageView10"
             android:layout_centerHorizontal="true"
             android:gravity="center"
-            android:text="Confirm"
-            android:textSize="@dimen/abc_action_button_min_width_overflow_material"
+            android:text="Confirmer"
             android:textColor="@color/text"
              />
 
@@ -80,10 +88,10 @@
             android:id="@+id/TextView01"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            
+            android:layout_above="@+id/textView2"
             android:layout_alignLeft="@+id/textView1"
-            android:layout_marginTop="230dp"
-            android:text="Height(cm)"
+            android:layout_marginBottom="0dp"
+            android:text="Taille"
             android:textColor="@color/textChonometer"
              />
 
@@ -120,11 +128,31 @@
             android:id="@+id/editTaille"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/ImageView05"
+            android:layout_above="@+id/textView2"
             android:layout_alignLeft="@+id/editPoid"
-            android:layout_alignTop="@+id/TextView01"
+          
+            
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/textChonometer" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ImageView10"
+            android:layout_alignLeft="@+id/TextView01"
+            android:layout_marginBottom="105dp"
+            android:text="Poids"
+            android:textColor="@color/textChonometer" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ImageView04"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="64dp"
+            android:src="@drawable/genderxhdpi" />
 
         <ImageView
             android:id="@+id/imageView4"
@@ -133,7 +161,15 @@
             android:layout_alignLeft="@+id/imageView2"
             android:layout_below="@+id/ImageView09"
             android:layout_marginTop="30dp"
-            
+            android:src="@drawable/champinfoxhdpi" />
+
+        <ImageView
+            android:id="@+id/ImageView04"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignRight="@+id/ImageView01"
+            android:layout_below="@+id/imageView4"
+            android:layout_marginTop="35dp"
             android:src="@drawable/champinfoxhdpi" />
 
         <ImageView
@@ -142,7 +178,6 @@
             android:layout_height="wrap_content"
             android:layout_alignTop="@+id/ImageView04"
             android:layout_toRightOf="@+id/ImageView01"
-            android:layout_marginRight="5dp"
             android:src="@drawable/checkxhdpi" />
 
         <TextView
@@ -153,8 +188,26 @@
             android:layout_alignTop="@+id/ImageView07"
             android:layout_marginLeft="15dp"
             android:layout_marginTop="8dp"
+           
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@color/textChonometer" />
+
+        <ImageView
+            android:id="@+id/ImageView07"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/ImageView05"
+            android:layout_marginTop="25dp"
+            android:src="@drawable/checkxhdpi" />
+
+        <ImageView
+            android:id="@+id/ImageView06"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/ImageView04"
+            android:layout_alignTop="@+id/ImageView07"
+            android:src="@drawable/champinfoxhdpi" />
 
         <TextView
             android:id="@+id/editAge"
@@ -173,7 +226,6 @@
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/ImageView01"
-            android:layout_marginRight="5dp"
             android:src="@drawable/checkxhdpi" />
 
         <ImageView
@@ -183,82 +235,7 @@
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/checkHomme"
             android:src="@drawable/checkedxhdpi"
-            android:layout_marginRight="5dp"
             android:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/textViewUpdate"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/ImageView10"
-            android:layout_marginBottom="22dp"
-            android:layout_toRightOf="@+id/TextView01"
-            android:visibility="invisible"
-            android:text="You can update your preferences" />
-
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginTop="80dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/genderxhdpi" />
-
-        <ImageView
-            android:id="@+id/ImageView10"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_alignParentLeft="true"
-            android:layout_marginBottom="41dp"
-            android:layout_marginLeft="5dp"
-            android:src="@drawable/champfbmodif" />
-
-        <ImageView
-            android:id="@+id/ImageView04"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/imageView4"
-            android:layout_below="@+id/imageView4"
-            android:layout_marginTop="31dp"
-            android:src="@drawable/champinfoxhdpi" />
-
-        <TextView
-            android:id="@+id/textView6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/editPoid"
-            android:layout_alignBottom="@+id/editPoid"
-            android:layout_alignLeft="@+id/TextView01"
-            android:text="Weight(KG)"
-            android:textColor="@color/textChonometer" />
-
-        <ImageView
-            android:id="@+id/ImageView06"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/ImageView04"
-            android:layout_alignTop="@+id/ImageView07"
-            android:src="@drawable/champinfoxhdpi" />
-
-        <ImageView
-            android:id="@+id/ImageView07"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_below="@+id/ImageView05"
-            android:layout_marginRight="5dp"
-            android:layout_marginTop="31dp"
-            android:src="@drawable/checkxhdpi" />
-
-        <ImageView
-            android:id="@+id/imageView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:src="@drawable/buttom" />
 
     </RelativeLayout>
 

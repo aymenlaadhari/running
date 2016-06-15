@@ -58,13 +58,10 @@
             android:id="@+id/textViewVitesse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/chronometer"
-            android:layout_alignBottom="@+id/chronometer"
+            android:layout_below="@+id/chronometer"
             android:layout_centerHorizontal="true"
-            android:text="@string/info"
-            android:visibility="invisible"
-            android:textColor="@color/text"
-            android:textSize="30dip" />
+            android:textSize="30dip" 
+            android:text="@string/info" />
 
     </RelativeLayout>
 

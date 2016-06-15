@@ -6,44 +6,26 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import ressources.Constatntes;
-
 import model.Runner;
 import android.annotation.SuppressLint;
-import android.app.ActionBar.LayoutParams;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.Signature;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.Request.Method;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.runningchallenge.app.AppController;
 import com.facebook.Request;
 import com.facebook.Request.GraphUserCallback;
 import com.facebook.Response;
@@ -69,29 +51,13 @@ public class MainActivity extends FragmentActivity {
 	private static final String TWITTER_KEY = "aTRXhmfxCbDC91XKUDBZC0xuf";
 	private static final String TWITTER_SECRET = "xYbK0bX9NRkm4EqPGT2rfexvuOzx9HTO9YRGfht0dMbO4M7CxN";
 	private TwitterLoginButton loginButton;
-	private boolean login = false;
-
-	public static final String Taille = "tailleKey";
-	public static final String Poid = "poidKey";
-	boolean isFacebook = true;
-	boolean exist;
-	boolean twitterConfig = false;
-	private ProgressDialog pDialog;
-	String uri;
+	private boolean login;
 	String facebookId;
-	String twitterID;
-	Intent intentVeryf;
-	LoginButton authButton;
-	TwitterSession sessionTwitter;
-	// url verify exist runner
-	private String urlExist = Constatntes.BASE_URL
-			+ "Runners?externalID=%1$s&externalProvider=%2$s";
 	public static final String PREFERENCES = "Prefs";
 	SharedPreferences sharedpreferences;
 	private static final String TAG = "MainFragment";
 	Runner runner;
-	DatabaseHelper helper = new DatabaseHelper(this);
-	WebService webService = new WebService();
+	DatabaseHelper helper;
 	private Session.StatusCallback callback = new Session.StatusCallback() {
 		@Override
 		public void call(Session session, SessionState state,
@@ -106,16 +72,12 @@ public class MainActivity extends FragmentActivity {
 		TwitterAuthConfig authConfig = new TwitterAuthConfig(TWITTER_KEY,
 				TWITTER_SECRET);
 		Fabric.with(this, new Twitter(authConfig));
-
+		login = false;
 		uiHelper = new UiLifecycleHelper(this, callback);
 		uiHelper.onCreate(savedInstanceState);
 		sharedpreferences = this.getSharedPreferences(PREFERENCES,
 				Context.MODE_PRIVATE);
-		intentVeryf = new Intent(this, WebService.class);
-
-		pDialog = new ProgressDialog(this);
-		pDialog.setMessage("Please wait...");
-		pDialog.setCancelable(false);
+		helper = new DatabaseHelper(this);
 
 		try {
 			PackageInfo info = getPackageManager().getPackageInfo(
@@ -134,65 +96,34 @@ public class MainActivity extends FragmentActivity {
 		}
 
 		setContentView(R.layout.activity_main);
-		authButton = (LoginButton) findViewById(R.id.authButton);
+		LoginButton authButton = (LoginButton) findViewById(R.id.authButton);
 		authButton.setReadPermissions(Arrays.asList("user_location",
 				"user_birthday", "user_likes"));
 		loginButton = (TwitterLoginButton) findViewById(R.id.twitter_login_button);
+		if(isNetworkAvailable()){
+		loginButton.setCallback(new Callback<TwitterSession>() {
+			@Override
+			public void success(Result<TwitterSession> result) {
+				// Do something with result, which provides a TwitterSession for
+				// making API calls
+				login = true;
+				TwitterSession session = Twitter.getSessionManager()
+						.getActiveSession();
+				TwitterAuthToken authToken = session.getAuthToken();
+				String token = authToken.token;
+				String secret = authToken.secret;
+				session.getUserId();
+				session.getUserName();
 
-		if (sharedpreferences.contains("Twitter")) {
-			authButton.setVisibility(View.INVISIBLE);
+			}
+
+			@Override
+			public void failure(TwitterException exception) {
+				// Do something on failure
+			}
+		});
 		}
-		
-		if (sharedpreferences.contains("Facebook")) {
-			RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
-					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-//			rel_btn.bottomMargin = 200;
-//			authButton.setLayoutParams(rel_btn);
-			
-			loginButton.setVisibility(View.INVISIBLE);
-
-		}
-		if (isNetworkAvailable()) {
-			loginButton.setCallback(new Callback<TwitterSession>() {
-				@Override
-				public void success(Result<TwitterSession> result) {
-					// Do something with result, which provides a TwitterSession
-					// for
-					// making API calls
-					login = true;
-					sessionTwitter = Twitter.getSessionManager()
-							.getActiveSession();
-
-					TwitterAuthToken authToken = sessionTwitter.getAuthToken();
-					String token = authToken.token;
-					String secret = authToken.secret;
-					if (first_time_check()) {
-						runner = new Runner();
-						runner.setFirstName(sessionTwitter.getUserName());
-						runner.setTwID(String.valueOf(sessionTwitter
-								.getUserId()));
-						helper.insertRunner(runner);
-						Toast.makeText(
-								getApplicationContext(),
-								"Twitter login, redirecting to configuration....",
-								Toast.LENGTH_LONG).show();
-
-						if (first_time_check()) {
-							twitterConfig = true;
-						}
-						Editor editor = sharedpreferences.edit();
-						editor.putString("Twitter", "ok");
-						editor.commit();
-					}
-
-				}
-
-				@Override
-				public void failure(TwitterException exception) {
-					// Do something on failure
-				}
-			});
-		} else {
+		else {
 			buildAlertMessageNoInternet();
 		}
 
@@ -202,14 +133,9 @@ public class MainActivity extends FragmentActivity {
 	@SuppressLint("CommitPrefEdits")
 	private void onSessionStateChange(Session session, SessionState state,
 			Exception exception) {
-		session = Session.getActiveSession();
-
 		if (state.isOpened()) {
 			makeRequest(session);
 			Log.i(TAG, "Logged in...");
-			Editor editor = sharedpreferences.edit();
-			editor.putString("Facebook", "ok");
-			editor.commit();
 			if (first_time_check()) {
 				Request.executeMeRequestAsync(session, new GraphUserCallback() {
 
@@ -217,11 +143,10 @@ public class MainActivity extends FragmentActivity {
 					public void onCompleted(GraphUser user, Response response) {
 						// TODO Auto-generated method stub
 						runner = new Runner();
-
 						runner.setFirstName(user.getFirstName());
 						runner.setLastName(user.getLastName());
 						runner.setFbID(user.getId());
-						if (user.getProperty("gender").equals("male")) {
+						if (user.getProperty("gender").equals("male") ) {
 							runner.setMale(true);
 						} else {
 							runner.setMale(false);
@@ -230,15 +155,9 @@ public class MainActivity extends FragmentActivity {
 						helper.insertRunner(runner);
 					}
 				});
-				try {
-					Thread.sleep(2000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				intentVeryf.putExtra("verify", "facebook");
-				startActivity(intentVeryf);
+				Intent intentPref = new Intent(this, PreferencesActivity.class);
 
+				startActivity(intentPref);
 			} else {
 				Intent intentMap = new Intent(this, MapActivity.class);
 				startActivity(intentMap);
@@ -258,7 +177,7 @@ public class MainActivity extends FragmentActivity {
 		 * button last time he logged in
 		 */
 		final boolean first;
-		if (sharedpreferences.contains(Taille)) {
+		if (sharedpreferences.contains(Age)) {
 			first = false;
 
 		} else {
@@ -277,17 +196,10 @@ public class MainActivity extends FragmentActivity {
 		if (session != null && (session.isOpened() || session.isClosed())) {
 			onSessionStateChange(session, session.getState(), null);
 		}
-		if (sharedpreferences.contains("Twitter")) {
-			authButton.setVisibility(View.INVISIBLE);
-		}
-		if (sharedpreferences.contains("Facebook")) {
-			loginButton.setVisibility(View.INVISIBLE);
-		}
-
+		// uiHelper.onResume();
 	}
 
 	private void makeRequest(final Session session) {
-
 		Request request = Request.newMeRequest(session,
 				new GraphUserCallback() {
 
@@ -295,7 +207,6 @@ public class MainActivity extends FragmentActivity {
 					@Override
 					public void onCompleted(GraphUser user, Response response) {
 						// TODO Auto-generated method stub
-						facebookId = user.getId();
 
 						if (session == Session.getActiveSession()) {
 							if (user != null) {
@@ -315,29 +226,12 @@ public class MainActivity extends FragmentActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		loginButton.onActivityResult(requestCode, resultCode, data);
-		if (login && twitterConfig) {
-			intentVeryf.putExtra("verify", "twitter");
-			startActivity(intentVeryf);
-
-		} else if (login) {
+		if (login) {
 			Intent intentMap = new Intent(getApplicationContext(),
 					MapActivity.class);
 			startActivity(intentMap);
 		}
 		uiHelper.onActivityResult(requestCode, resultCode, data);
-		if (sharedpreferences.contains("Twitter")) {
-			authButton.setVisibility(View.INVISIBLE);
-		}
-		if (sharedpreferences.contains("Facebook")) {
-			RelativeLayout.LayoutParams rel_btn = new RelativeLayout.LayoutParams(
-					LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-
-//			rel_btn.bottomMargin = 200;
-			loginButton.setVisibility(View.INVISIBLE);
-//			authButton.setLayoutParams(rel_btn);
-			
-		}
-
 	}
 
 	@Override
@@ -358,7 +252,7 @@ public class MainActivity extends FragmentActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
+	
 	private boolean isNetworkAvailable() {
 
 		ConnectivityManager connectivityManager = (ConnectivityManager) MainActivity.this
@@ -367,7 +261,7 @@ public class MainActivity extends FragmentActivity {
 				.getActiveNetworkInfo();
 		return activeNetworkInfo != null && activeNetworkInfo.isConnected();
 	}
-
+	
 	private void buildAlertMessageNoInternet() {
 		final AlertDialog.Builder builder = new AlertDialog.Builder(this);
 		builder.setMessage(
@@ -379,7 +273,7 @@ public class MainActivity extends FragmentActivity {
 									@SuppressWarnings("unused") final DialogInterface dialog,
 									@SuppressWarnings("unused") final int id) {
 								startActivity(new Intent(
-										android.provider.Settings.ACTION_WIFI_SETTINGS));
+										android.provider.Settings.ACTION_WIRELESS_SETTINGS));
 							}
 						})
 				.setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -390,99 +284,5 @@ public class MainActivity extends FragmentActivity {
 				});
 		final AlertDialog alert = builder.create();
 		alert.show();
-	}
-
-	/**
-	 * verify runner existence
-	 */
-	public boolean exist(String ID) {
-		if (isFacebook) {
-			uri = String.format(urlExist, ID, "Facebook");
-		} else {
-			uri = String.format(urlExist, ID, "Twitter");
-		}
-		showpDialog();
-		JsonObjectRequest jsonObjReq = new JsonObjectRequest(Method.GET, uri,
-				null, new com.android.volley.Response.Listener<JSONObject>() {
-					@Override
-					public void onResponse(JSONObject response) {
-						Log.d(TestWS.class.getSimpleName(), response.toString());
-						try {
-							if (response.getString("Exist").equals("true")) {
-								exist = true;
-
-							} else {
-								exist = false;
-
-							}
-
-						} catch (JSONException e) {
-							e.printStackTrace();
-							Toast.makeText(getApplicationContext(), "Error: ",
-									Toast.LENGTH_LONG).show();
-						}
-						hidepDialog();
-
-					}
-				}, new com.android.volley.Response.ErrorListener() {
-
-					@Override
-					public void onErrorResponse(VolleyError error) {
-						VolleyLog.d(TestWS.class.getSimpleName(), "Error: "
-								+ error.getMessage());
-						Toast.makeText(getApplicationContext(),
-								error.getMessage(), Toast.LENGTH_SHORT).show();
-						// hide the progress dialog
-						hidepDialog();
-
-					}
-				});
-
-		// Adding request to request queue
-		AppController.getInstance().addToRequestQueue(jsonObjReq);
-
-		return exist;
-
-	}
-
-	private void showpDialog() {
-		if (!pDialog.isShowing())
-			pDialog.show();
-	}
-
-	private void hidepDialog() {
-		if (pDialog.isShowing())
-			pDialog.dismiss();
-	}
-
-	public void verifyRunnerFB() {
-		if (exist) {
-			Toast.makeText(getApplicationContext(), "User exist, so update",
-					Toast.LENGTH_LONG).show();
-
-			Editor editor = sharedpreferences.edit();
-
-			String weight = webService.getExistedWeight(helper.findAllRunner()
-					.get(0).getFbID());
-			String height = webService.getExistedHeight(helper.findAllRunner()
-					.get(0).getFbID());
-
-			editor.putString(Poid, weight);
-			editor.putString(Taille, height);
-
-			editor.commit();
-
-			Intent intentPref = new Intent(MainActivity.this,
-					PreferencesActivity.class);
-
-			startActivity(intentPref);
-		} else {
-
-			Toast.makeText(getApplicationContext(),
-					"User does not exist so create", Toast.LENGTH_LONG).show();
-			Intent intentPref = new Intent(MainActivity.this,
-					PreferencesActivity.class);
-			startActivity(intentPref);
-		}
 	}
 }

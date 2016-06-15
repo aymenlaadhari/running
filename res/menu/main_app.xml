@@ -1,30 +1,9 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
-
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_settings"
         android:icon="@drawable/menu"
         android:title="@string/action_settings"
-        app:showAsAction="ifRoom">
-        
-        <menu>
-            <item
-                android:id="@+id/action_year"
-                android:title="Years"
-                app:showAsAction="never"/>
-            <item
-                android:id="@+id/action_month"
-                android:title="Months"
-                app:showAsAction="never"/>
-            <item
-                android:id="@+id/action_day"
-                android:title="Days"
-                app:showAsAction="never"/>
-            <item
-                android:id="@+id/action_db"
-                android:title="Show DB"
-                app:showAsAction="never"/>
-        </menu>
-    </item>
+        app:showAsAction="always"/>
 
 </menu>

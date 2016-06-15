@@ -76,7 +76,7 @@
         android:layout_alignBottom="@+id/Time"
         android:layout_alignRight="@+id/Time"
         android:layout_marginBottom="29dp"
-        android:layout_marginRight="30dp"
+        android:layout_marginRight="39dp"
         android:text="00.00"
         android:textColor="@color/text"
         android:textSize="@dimen/abc_action_button_min_width_overflow_material" />
