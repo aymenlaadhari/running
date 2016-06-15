@@ -37,12 +37,22 @@
             android:layout_marginRight="11dp"
             android:src="@drawable/orange" />
 
+        <com.twitter.sdk.android.core.identity.TwitterLoginButton
+            android:id="@+id/twitter_login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ImageView01"
+            android:layout_alignLeft="@+id/authButton"
+            android:layout_alignRight="@+id/authButton"
+            android:layout_marginBottom="97dp" />
+
         <ImageView
             android:id="@+id/imageView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:layout_above="@+id/authButton"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="42dp"
             android:src="@drawable/logo" />
 
         <com.facebook.widget.LoginButton
@@ -50,19 +60,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/twitter_login_button"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="56dp"
+            android:layout_alignLeft="@+id/imageView2"
+            android:layout_alignRight="@+id/imageView2"
+            android:layout_marginBottom="52dp"
             android:visibility="visible" />
-
-        <com.twitter.sdk.android.core.identity.TwitterLoginButton
-            android:id="@+id/twitter_login_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/ImageView01"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginBottom="97dp" />
 
     </RelativeLayout>
 

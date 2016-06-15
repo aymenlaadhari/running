@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="statistics_menu">Statistik</string>
+    <string name="edi_menu">Abwandeln</string>
+    <string name="logout_menu">Logout</string>
+    <string name="days_menu">Tage</string>
+    <string name="months_menu">Monate</string>
+    <string name="calories_statchart">Kalorienverbrauch</string>
+    <string name="speed_statchart">Geschwindigkeit</string>
+    <string name="distance_statchart">Entfernung Abgelaufene</string>
+    <string name="distance_mesur">Meters</string>
+    <string name="calories_mesur">K.Cal</string>
+    <string name="speed_mesur">KM/H</string>
+
+    <string-array name="days_array">
+        <item>Mon</item>
+        <item>Diens</item>
+        <item>Mitt</item>
+        <item>Donners</item>
+        <item>Frei</item>
+        <item>Sams</item>
+        <item>Sonn</item>
+    </string-array>
+    <string-array name="months_array">
+        <item>Jan</item>
+        <item>Feb</item>
+        <item>Mär</item>
+        <item>Apr</item>
+        <item>May</item>
+        <item>Jun</item>
+        <item>Jul</item>
+        <item>Aug</item>
+        <item>Sep</item>
+        <item>Okt</item>
+        <item>Nov</item>
+        <item>Dez</item>
+    </string-array>
+
+</resources>

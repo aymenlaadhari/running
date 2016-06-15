@@ -84,32 +84,33 @@
         android:layout_alignTop="@+id/imageView2"
         android:layout_margin="1dp"
         android:gravity="center"
-        android:text="30km"
+        
         android:textColor="@color/textChonometer" />
+
       <TextView
-        android:id="@+id/gagnant2Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView3"
-        android:layout_alignLeft="@+id/imageView3"
-        android:layout_alignRight="@+id/imageView3"
-        android:layout_alignTop="@+id/imageView3"
-        android:layout_margin="1dp"
-        android:gravity="center"
-        android:text="20km"
-        android:textColor="@color/textChonometer" />
+          android:id="@+id/gagnant2Text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/imageView3"
+          android:layout_alignLeft="@+id/imageView3"
+          android:layout_alignRight="@+id/imageView3"
+          android:layout_alignTop="@+id/imageView3"
+          android:layout_margin="1dp"
+          android:gravity="center"
+          android:textColor="@color/textChonometer" />
+
       <TextView
-        android:id="@+id/gangnant3Text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/imageView4"
-        android:layout_alignLeft="@+id/imageView4"
-        android:layout_alignRight="@+id/imageView4"
-        android:layout_alignTop="@+id/imageView4"
-        android:layout_margin="1dp"
-        android:gravity="center"
-        android:text="12km"
-        android:textColor="@color/textChonometer" />
+          android:id="@+id/gangnant3Text"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_alignBottom="@+id/imageView4"
+          android:layout_alignLeft="@+id/imageView4"
+          android:layout_alignRight="@+id/imageView4"
+          android:layout_alignTop="@+id/imageView4"
+          android:layout_margin="1dp"
+          android:gravity="center"
+          android:textColor="@color/textChonometer" />
+
       <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"

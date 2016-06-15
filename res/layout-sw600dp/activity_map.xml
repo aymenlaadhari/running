@@ -33,7 +33,7 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="72dp"
-            android:background="@drawable/starttablet7"
+            android:background="@drawable/start7"
             android:visibility="invisible" />
 
         <Button
@@ -42,7 +42,7 @@
             android:layout_height="40dp"
             android:layout_alignLeft="@+id/off_btn"
             android:layout_alignTop="@+id/off_btn"
-            android:background="@drawable/stoptablet7" />
+            android:background="@drawable/stop7" />
 
         <Chronometer
             android:id="@+id/chronometer"
@@ -58,10 +58,13 @@
             android:id="@+id/textViewVitesse"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/chronometer"
+            android:layout_alignBaseline="@+id/chronometer"
+            android:layout_alignBottom="@+id/chronometer"
             android:layout_centerHorizontal="true"
-            android:textSize="30dip" 
-            android:text="@string/info" />
+            android:text="@string/info"
+            android:visibility="invisible"
+            android:textColor="@color/text"
+            android:textSize="30dip" />
 
     </RelativeLayout>
 

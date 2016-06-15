@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>chart created with amCharts | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/serial.js"></script>
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
+					"categoryField": "category",
+					"startDuration": 1,
+					"theme": "default",
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "[[title]] of [[category]]:[[value]]",
+							"bullet": "round",
+							"id": "AmGraph-1",
+							"title": "graph 1",
+							"valueField": "column-1"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "Speed KM/H"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"legend": {
+						"useGraphSettings": true
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Speed Chart"
+						}
+					],
+					"dataProvider": [
+						{
+							"category": "January",
+							"column-1": "50"
+						},
+						{
+							"category": "February",
+							"column-1": 6
+						},
+						{
+							"category": "Mars",
+							"column-1": 2
+						},
+						{
+							"category": "April",
+							"column-1": 1
+						},
+						{
+							"category": "May",
+							"column-1": 2
+						},
+						{
+							"category": "June",
+							"column-1": 3
+						},
+						{
+							"category": "July",
+							"column-1": 6
+						},
+						{
+							"category": "August",
+							"column-1": 6
+						},
+						{
+							"category": "September",
+							"column-1": 6
+						},
+						{
+							"category": "October",
+							"column-1": 6
+						},
+						{
+							"category": "November",
+							"column-1": 6
+						},
+						{
+							"category": "December",
+							"column-1": 6
+						}
+					]
+				}
+			);
+		</script>
+	</head>
+	<body>
+		<div id="chartdiv" style="width: 780px; height: 300px; background-color: transparent;" ></div>
+	</body>
+</html>

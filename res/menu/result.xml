@@ -1,9 +1,28 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-<!--     <item -->
-<!--         android:id="@+id/classement" -->
-<!--         android:title="classment" -->
-<!--         android:orderInCategory="0" -->
-<!--         app:showAsAction="always" -->
-<!--         android:icon="@drawable/classemenet" /> -->
+    xmlns:app="http://schemas.android.com/apk/res-auto" >
+
+    <item
+        android:id="@+id/action_settings"
+        android:icon="@drawable/menumenu"
+        android:title="@string/action_settings"
+        app:showAsAction="always">
+        <menu>
+            <item
+                android:id="@+id/action_statistics"
+                android:icon="@drawable/statmenu"
+                android:title="@string/statistics_menu"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/action_preferences"
+                android:icon="@drawable/editmenu"
+                android:title="@string/edi_menu"
+                app:showAsAction="never"/>
+            <item
+                android:id="@+id/action_signout"
+                android:icon="@drawable/logoutmenu"
+                android:title="@string/logout_menu"
+                app:showAsAction="never"/>
+        </menu>
+    </item>
+
 </menu>

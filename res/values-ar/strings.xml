@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+     <string name="statistics_menu">إحصائيات</string>
+    <string name="edi_menu">تغيير</string>
+    <string name="logout_menu">خروج</string>
+    <string name="days_menu">أيام</string>
+    <string name="months_menu">أشهر</string>
+    <string name="calories_statchart"> السعرات الحرارية</string>
+    <string name="speed_statchart">سرعة</string>
+    <string name="distance_statchart">المسافة</string>
+    <string name="distance_mesur">متر</string>
+    <string name="calories_mesur">كيلو.سعرة</string>
+    <string name="speed_mesur">كيلومتر/س</string>
+    
+    
+    <string-array name="days_array">
+        <item>الإثنين</item>
+        <item>الثلاثاء</item>
+        <item>الأربعاء</item>
+        <item>الخميس</item>
+        <item>الجمعة</item>
+        <item>السبت</item>
+        <item>الأحد</item>
+    </string-array>
+    
+    <string-array name="months_array">
+        <item>ينا</item>
+        <item>فبر</item>
+        <item>مار</item>
+        <item>أبر</item>
+        <item>ماي</item>
+        <item>يون</item>
+        <item>يون</item>
+        <item>أغس</item>
+        <item>سبتم</item>
+        <item>أكت</item>
+        <item>نوف</item>
+        <item>ديس</item>
+    </string-array>
+</resources>

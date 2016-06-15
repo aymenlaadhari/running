@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>chart created with amCharts | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/serial.js"></script>
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+		var str = '%DATA%';
+		var data = JSON.parse(str);
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
+					"categoryField": "category",
+					"startDuration": 1,
+					"color": "#ff5d00",
+					"size": 30,
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonColor": "#FF8000",
+							"colorField": "color",
+							"fillAlphas": 0.45,
+							"fillColors": "#FF8000",
+							"id": "AmGraph-1",
+							"lineAlpha": 0,
+							"lineColorField": "color",
+							"title": "graph 1",
+							"type": "column",
+							"valueField": "column-1"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "K.Cal"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Calories Burned"
+						}
+					],
+					"dataProvider": data
+				}
+			);
+		</script>
+	</head>
+	<body>
+		<div id="chartdiv" style="width: %DATAW%; height: %DATAH%; background-color: transparent;" ></div>
+	</body>
+</html>

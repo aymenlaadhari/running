@@ -10,6 +10,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -26,6 +27,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.hardware.Sensor;
@@ -42,7 +44,13 @@ import android.os.SystemClock;
 import android.os.Vibrator;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.InflateException;
+import android.view.LayoutInflater;
+import android.view.LayoutInflater.Factory;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -57,9 +65,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.facebook.Session;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMap.InfoWindowAdapter;
+import com.google.android.gms.maps.GoogleMap.OnMyLocationButtonClickListener;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
@@ -67,6 +77,10 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.TwitterAuthToken;
+import com.twitter.sdk.android.core.TwitterSession;
+
 import contentprovider.DatabaseHelper;
 
 @SuppressLint({ "InlinedApi", "InflateParams" })
@@ -79,6 +93,8 @@ public class MapActivity extends ActionBarActivity implements
 	double mySpeed;
 	private float parcours = 0;
 	int i = 0;
+	boolean fraude = false;
+	double sommeCalories = 0.0;
 	CameraPosition cameraPosition;
 	FusedLocationService fusedLocationService;
 	private static LatLng prev;
@@ -96,6 +112,7 @@ public class MapActivity extends ActionBarActivity implements
 	String speedString;
 	String unitString;
 	float distance;
+	MenuItem items;
 	float poids;
 	String calories;
 	List<String> speedList;
@@ -122,7 +139,7 @@ public class MapActivity extends ActionBarActivity implements
 	private float deltaZ = 0;
 	private float vibrateThreshold = 0;
 	public Vibrator v;
-	ImageButton buttonStat,buttonClass;
+	ImageButton buttonClass;
 
 	@SuppressLint("InlinedApi")
 	@Override
@@ -130,24 +147,26 @@ public class MapActivity extends ActionBarActivity implements
 		super.onCreate(savedInstanceState);
 		helper = new DatabaseHelper(getApplicationContext());
 		prefs = getSharedPreferences("Prefs", Context.MODE_PRIVATE);
-		//poids = Float.parseFloat(prefs.getString(Poid, ""));
+		// poids = Float.parseFloat(prefs.getString(Poid, ""));
 		poids = helper.findAllRunner().get(0).getWeight();
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setBackgroundDrawable(new ColorDrawable(Color
 				.parseColor("#99000000")));
+
 		Drawable d = getResources().getDrawable(R.drawable.header);
 		actionBar.setBackgroundDrawable(d);
-		View mActionBarView = getLayoutInflater().inflate(R.layout.actionbar_custom_view_home, null);
+		View mActionBarView = getLayoutInflater().inflate(
+				R.layout.actionbar_custom_view_home, null);
 		actionBar.setCustomView(mActionBarView);
 		actionBar.setDisplayOptions(ActionBar.DISPLAY_SHOW_CUSTOM);
 		actionBar.setDisplayShowTitleEnabled(false);
 		actionBar.setDisplayShowCustomEnabled(true);
-		 speedList = new ArrayList<String>();
-		 distanceList = new ArrayList<Float>();
-		 tempsList = new ArrayList<String>();
-		 caloriesList = new ArrayList<String>();
-		 lats = new ArrayList<String>();
-		 lons = new ArrayList<String>();
+		speedList = new ArrayList<String>();
+		distanceList = new ArrayList<Float>();
+		tempsList = new ArrayList<String>();
+		caloriesList = new ArrayList<String>();
+		lats = new ArrayList<String>();
+		lons = new ArrayList<String>();
 		accelerations = new ArrayList<Float>();
 		listMarkerOptions = new ArrayList<MarkerOptions>();
 
@@ -155,44 +174,76 @@ public class MapActivity extends ActionBarActivity implements
 		 * Initialisation de tout les composants
 		 */
 		setContentView(R.layout.activity_map);
+		googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+				R.id.map)).getMap();
+		googleMap.setMyLocationEnabled(true);
+		googleMap.setBuildingsEnabled(true);
+		googleMap.setIndoorEnabled(true);
+
+		LocationManager locMan = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+		if (!locMan.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			buildAlertMessageNoGps();
+			if (locMan.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+				recreate();
+			}
+
+		} else if (locMan.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+			Criteria crit = new Criteria();
+
+			Location loc = locMan.getLastKnownLocation(locMan.getBestProvider(
+					crit, false));
+
+			if (loc != null) {
+				LatLng latLng = new LatLng(loc.getLatitude(),
+						loc.getLongitude());
+
+				CameraPosition camPos = new CameraPosition.Builder()
+
+				.target(new LatLng(loc.getLatitude(), loc.getLongitude()))
+
+				.zoom(12.8f)
+
+				.build();
+
+				CameraUpdate camUpdate = CameraUpdateFactory
+						.newCameraPosition(camPos);
+
+				googleMap.moveCamera(camUpdate);
+				googleMap.addMarker(new MarkerOptions().position(latLng).title(
+						"Hello"));
+
+			}
+
+		}
+
 		gpsManager = new GPSManager();
 		gpsManager.startListening(getApplicationContext());
 		gpsManager.setGPSCallback(this);
-		((TextView) findViewById(R.id.textViewVitesse))
-				.setText(getString(R.string.info));
+		Typeface custom_font = Typeface.createFromAsset(getAssets(),
+				"fonts/berlin-sans-fb-demi-bold.ttf");
+		TextView textShowSpeed = (TextView) findViewById(R.id.textViewVitesse);
+		textShowSpeed.setTypeface(custom_font);
+		textShowSpeed.setText(getString(R.string.info));
+		// textShowSpeed.setVisibility(View.INVISIBLE);
 		measurement_index = AppSettings.getMeasureUnit(this);
 		chronometer = (Chronometer) findViewById(R.id.chronometer);
 		runner = (Runner) helper.findAllRunner().get(0);
 		final Button mNotification_on_btn = (Button) findViewById(R.id.on_btn);
 		final Button mNotification_off_btn = (Button) findViewById(R.id.off_btn);
-		buttonClass = (ImageButton)findViewById(R.id.actionBarIconClassment);
-		buttonClass.getBackground().setAlpha(32); 
+		buttonClass = (ImageButton) findViewById(R.id.actionBarIconClassment);
+		buttonClass.getBackground().setAlpha(5);
 		buttonClass.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-			
+
 				Intent intent = new Intent(getApplication(),
 						ClassementActivity.class);
 				startActivity(intent);
 			}
 		});
 
-		
-		buttonStat = (ImageButton)findViewById(R.id.actionBarIconStat);
-		buttonStat.getBackground().setAlpha(32); 
-		buttonStat.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				
-				Intent intent = new Intent(getApplication(),
-						StatisticsActivity.class);
-				startActivity(intent);
-			}
-		});
 		/*
 		 * The start button
 		 */
@@ -206,17 +257,20 @@ public class MapActivity extends ActionBarActivity implements
 				mNotification_off_btn.setVisibility(View.VISIBLE);
 				chronometer.stop();
 				Date date = new Date();
-				if(speedList.isEmpty())
-				{
-					addStatistics(allCalories(caloriesList), distance, runner,
-							date, Double.parseDouble("0.0"), chronometer.getText().toString());
+				if (speedList.isEmpty()) {
+					addStatistics(sommeCalories, distance, runner, date, Double
+							.parseDouble("0.0"), chronometer.getText()
+							.toString(), "0");
+				} else {
+
+					addStatistics(sommeCalories, distance, runner, date,
+							speedMoy(speedList), chronometer.getText()
+									.toString(), String.valueOf(note(
+									showElapsedTime(), speedMoy(speedList))));
 				}
-				else {
-					addStatistics(allCalories(caloriesList), distance, runner,
-							date, speedMoy(speedList), chronometer.getText().toString());
-				}
-				
+
 				chronometer.setBase(SystemClock.elapsedRealtime());
+
 				Intent inpoints = new Intent(MapActivity.this,
 						ResultActivity.class);
 				Markers markers = new Markers();
@@ -224,9 +278,8 @@ public class MapActivity extends ActionBarActivity implements
 				markers.setLen(lons);
 				inpoints.putExtra("poinResult", markers);
 				getDatBase();
-
-				finish();
 				startActivity(inpoints);
+				finish();
 			}
 		});
 		mNotification_off_btn.setOnClickListener(new OnClickListener() {
@@ -243,6 +296,7 @@ public class MapActivity extends ActionBarActivity implements
 	}
 
 	private void init() {
+		googleMap.clear();
 		this.locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 		if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
 			buildAlertMessageNoGps();
@@ -250,9 +304,7 @@ public class MapActivity extends ActionBarActivity implements
 		markerPoints = new ArrayList<LatLng>();
 		Criteria criteria = new Criteria();
 		provider = locationManager.getBestProvider(criteria, false);
-		googleMap = ((MapFragment) getFragmentManager().findFragmentById(
-				R.id.map)).getMap();
-		googleMap.setMyLocationEnabled(true);
+
 		googleMap.getUiSettings().setTiltGesturesEnabled(true);
 		googleMap.setTrafficEnabled(true);
 		locationManager.requestLocationUpdates(provider, 400, 1, this);
@@ -277,7 +329,6 @@ public class MapActivity extends ActionBarActivity implements
 	public boolean onCreateOptionsMenu(Menu menu) {
 		MenuInflater inflater = getMenuInflater();
 		inflater.inflate(R.menu.map, menu);
-
 		return super.onCreateOptionsMenu(menu);
 	}
 
@@ -287,21 +338,29 @@ public class MapActivity extends ActionBarActivity implements
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		 if (id == R.id.action_classement) {
+
+		if (id == R.id.action_signout) {
 
 			if (Session.getActiveSession() != null) {
 				Session.getActiveSession().closeAndClearTokenInformation();
 				finish();
 			}
-			SharedPreferences settings = getApplication().getSharedPreferences(
-					"PreferencesName", Context.MODE_PRIVATE);
-			settings.edit().remove("ageKey").commit();
 
 			Session.setActiveSession(null);
 			finish();
 
 			return true;
 
+		}
+		if (id == R.id.action_statistics) {
+			Intent intent = new Intent(getApplication(),
+					StatisticsActivity.class);
+			startActivity(intent);
+		}
+		if (id == R.id.action_preferences) {
+			Intent intent = new Intent(getApplication(),
+					PreferencesActivity.class);
+			startActivity(intent);
 		}
 
 		return super.onOptionsItemSelected(item);
@@ -364,7 +423,7 @@ public class MapActivity extends ActionBarActivity implements
 			googleMap.addPolyline(new PolylineOptions()
 					.add(markerPoints.get(count),
 							markerPoints.get(markerPoints.size() - 1)).width(8)
-					.color(Color.BLUE).geodesic(true));
+					.color(Color.rgb(255, 178, 102)).geodesic(true));
 			Location locationA = new Location("point A");
 			locationA
 					.setLatitude(markerPoints.get(markerPoints.size() - 2).latitude);
@@ -381,19 +440,21 @@ public class MapActivity extends ActionBarActivity implements
 			googleMap.animateCamera(
 					CameraUpdateFactory.newCameraPosition(cameraPosition),
 					2000, null);
+			distanceList.add(parcours);
 
 			/*
 			 * add marker after each 10m
 			 */
 			if (Math.round(parcours) % 10 == 0) {
 				// speedList.add(speedString + " " + unitString);
+
 				
-				distanceList.add(parcours);
 				tempsList.add(chronometer.getText().toString());
 				calories = String.valueOf(getCalories(poids, constante,
 						distance));
-//				Toast.makeText(getApplicationContext(), calories,
-//						Toast.LENGTH_SHORT).show();
+				double caloriesD = getCalories(poids, constante, distance);
+				sommeCalories = sommeCalories + caloriesD;
+
 				caloriesList.add(calories);
 				LatLng local = new LatLng(location.getLatitude(),
 						location.getLongitude());
@@ -401,9 +462,11 @@ public class MapActivity extends ActionBarActivity implements
 				marker.position(local);
 				listMarkerOptions.add(marker);
 				marker.title(tempsList.get(i));
+				marker.icon(BitmapDescriptorFactory.fromResource(R.drawable.parcours));
+				marker.flat(true);
 				googleMap.addMarker(marker);
 				// googleMap.addMarker(options);
-				// googleMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
+				 googleMap.setInfoWindowAdapter(new MyInfoWindowAdapter());
 				i++;
 
 			}
@@ -427,8 +490,7 @@ public class MapActivity extends ActionBarActivity implements
 	@Override
 	protected void onResume() {
 		super.onResume();
-		// sensorManager.registerListener(this, accelerometer,
-		// SensorManager.SENSOR_DELAY_NORMAL);
+
 		/*
 		 * mettre à jour le gps
 		 */
@@ -440,19 +502,28 @@ public class MapActivity extends ActionBarActivity implements
 	protected void onStop() {
 		// TODO Auto-generated method stub
 		super.onStop();
+		if (sensorManager != null) {
+			sensorManager.unregisterListener(this);
+		}
 	}
 
 	@Override
 	protected void onDestroy() {
 		// TODO Auto-generated method stub
 		super.onDestroy();
+		if (sensorManager != null) {
+			sensorManager.unregisterListener(this);
+		}
 	}
 
 	@Override
 	protected void onPause() {
 		// TODO Auto-generated method stub
 		super.onPause();
-		// sensorManager.unregisterListener(this);
+		if (sensorManager != null) {
+			sensorManager.unregisterListener(this);
+		}
+
 	}
 
 	@Override
@@ -513,7 +584,7 @@ public class MapActivity extends ActionBarActivity implements
 	 * Get Calories burned
 	 */
 	private double getCalories(float poid, float constante, float distance) {
-		return poid * constante * distance / 10000.00;
+		return poid * constante * distance / 1000.00;
 	}
 
 	/*
@@ -646,7 +717,7 @@ public class MapActivity extends ActionBarActivity implements
 		for (int i = 0; i < speedList.size() - 1; i++) {
 			speedMoyd = speedMoyd + Double.parseDouble(speedList.get(i));
 		}
-		return speedMoyd/speedList.size();
+		return speedMoyd / speedList.size();
 	}
 
 	/*
@@ -665,7 +736,7 @@ public class MapActivity extends ActionBarActivity implements
 	 * add running statistics in data base
 	 */
 	public void addStatistics(double calories, double distance, Runner runner,
-			Date runningDate, double speed, String time) {
+			Date runningDate, double speed, String time, String note) {
 		RunnerStatistics runnerStatistics = new RunnerStatistics();
 		runnerStatistics.setCalories(calories);
 		runnerStatistics.setDistance(distance);
@@ -673,6 +744,7 @@ public class MapActivity extends ActionBarActivity implements
 		runnerStatistics.setRunningDate(runningDate);
 		runnerStatistics.setSpeed(speed);
 		runnerStatistics.setTime(time);
+		runnerStatistics.setNote(note);
 		helper.insertStataistics(runnerStatistics);
 
 	}
@@ -682,8 +754,7 @@ public class MapActivity extends ActionBarActivity implements
 	 */
 	private boolean fraude() {
 		boolean fraude = false;
-		if ((deltaX > vibrateThreshold) || (deltaY > vibrateThreshold)
-				|| (deltaZ > vibrateThreshold) && deltaX >= 20.0) {
+		if ( deltaX >= 30.0 || deltaY>= 25.0) {
 			fraude = true;
 		}
 
@@ -693,12 +764,14 @@ public class MapActivity extends ActionBarActivity implements
 	/*
 	 * Note assigned
 	 */
-	private int note() {
+	private int note(long time, double vitesse) {
 		float note = 0;
+		float percent = (float) (0.8 + 0.1894393 * Math.exp(-0.012778 * time) + 0.2989558 * Math
+				.exp(-0.1932605 * time));
+		float vo = (float) (4.60 + 0.182258 * vitesse + 0.000104 * Math.pow(
+				vitesse, 2));
 
-		for (int i = 0; i < accelerations.size(); i++) {
-			note = note + accelerations.get(i) / distanceList.get(i);
-		}
+		note = percent / vo;
 		return Math.round(note);
 
 	}
@@ -733,8 +806,12 @@ public class MapActivity extends ActionBarActivity implements
 		accelerations.add(deltaX);
 
 		if (fraude()) {
-			v.vibrate(50);
-			// showDialog();
+			v.vibrate(1000);
+			Intent intent = new Intent(getApplication(), FraudActivity.class);
+			startActivity(intent);
+			finish();
+			fraude = true;
+
 		}
 
 	}
@@ -745,8 +822,6 @@ public class MapActivity extends ActionBarActivity implements
 
 	}
 
-	
-
 	// display the current x,y,z accelerometer values
 	public void displayCurrentValues() {
 		// Toast.makeText(getApplicationContext(), Float.toString(deltaX),
@@ -756,7 +831,6 @@ public class MapActivity extends ActionBarActivity implements
 		// Toast.makeText(getApplicationContext(), Float.toString(deltaZ),
 		// Toast.LENGTH_SHORT).show();
 	}
-	
 
 	@SuppressLint("SdCardPath")
 	public void showDialog() {
@@ -766,44 +840,45 @@ public class MapActivity extends ActionBarActivity implements
 		builder1.setPositiveButton("Yes",
 				new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int id) {
-						dialog.cancel();
+						recreate();
 					}
 				});
 
 		AlertDialog alert11 = builder1.create();
 		alert11.show();
 	}
-	
+
 	@SuppressLint("SdCardPath")
-	public void getDatBase()
-	{
-		 String sourceLocation = "/data/data/com.sample/databases/running.db" ;// Your database path
-	        String destLocation = "running.db";
-	        try {
-	            File sd = Environment.getExternalStorageDirectory();
-	            if(sd.canWrite()){
-	                File source=new File(sourceLocation);
-	                File dest=new File(sd+"/"+destLocation);
-	                if(!dest.exists()){
-	                    dest.createNewFile();
-	                }
-	                if(source.exists()){
-	                    InputStream  src=new FileInputStream(source);
-	                    OutputStream dst=new FileOutputStream(dest);
-	                    // Copy the bits from instream to outstream
-	                    byte[] buf = new byte[1024];
-	                    int len;
-	                    while ((len = src.read(buf)) > 0) {
-	                        dst.write(buf, 0, len);
-	                    }
-	                    src.close();
-	                    dst.close();
-	                }
-	            }
-	           
-	        } catch (Exception ex) {
-	            ex.printStackTrace();
-	            
-	        }
+	public void getDatBase() {
+		String sourceLocation = "/data/data/com.sample/databases/running.db";// Your
+																				// database
+																				// path
+		String destLocation = "running.db";
+		try {
+			File sd = Environment.getExternalStorageDirectory();
+			if (sd.canWrite()) {
+				File source = new File(sourceLocation);
+				File dest = new File(sd + "/" + destLocation);
+				if (!dest.exists()) {
+					dest.createNewFile();
+				}
+				if (source.exists()) {
+					InputStream src = new FileInputStream(source);
+					OutputStream dst = new FileOutputStream(dest);
+					// Copy the bits from instream to outstream
+					byte[] buf = new byte[1024];
+					int len;
+					while ((len = src.read(buf)) > 0) {
+						dst.write(buf, 0, len);
+					}
+					src.close();
+					dst.close();
+				}
+			}
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+
+		}
 	}
 }

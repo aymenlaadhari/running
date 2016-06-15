@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="16"
+        android:minSdkVersion="14"
         android:targetSdkVersion="21" />
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -59,7 +59,7 @@
             android:name=".StatisticsActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_main_app"
-            android:parentActivityName="com.example.runningchallenge.MapActivity"
+            android:parentActivityName=".MapActivity"
             android:screenOrientation="portrait" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
@@ -71,9 +71,8 @@
             android:name=".MapActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_map"
-            android:parentActivityName="com.example.runningchallenge.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light" >
+            android:parentActivityName=".MainActivity"
+            android:screenOrientation="portrait" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -91,8 +90,7 @@
         <activity
             android:name=".ResultActivity"
             android:label="@string/title_activity_result"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.example.runningchallenge.MapActivity" >
+            android:screenOrientation="portrait" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -101,23 +99,24 @@
         </activity>
         <activity
             android:name=".SplashActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".SettingActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_setting" >
+            android:label="@string/title_activity_setting"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".ClassementActivity"
             android:label="@string/title_activity_classement"
-            android:screenOrientation="portrait"
-            android:parentActivityName="com.example.runningchallenge.MapActivity" >
+            android:parentActivityName=".MapActivity"
+            android:screenOrientation="portrait" >
 
             <!-- Parent activity meta-data to support 4.0 and lower -->
             <meta-data
@@ -126,18 +125,18 @@
         </activity>
         <activity
             android:name=".PreferencesActivity"
-            android:screenOrientation="portrait"
-            android:label="@string/title_activity_preferences" >
-           
+            android:label="@string/title_activity_preferences"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".SpeedActivity"
             android:label="@string/title_activity_speed" >
         </activity>
-        <activity android:name="com.example.runningchallenge.AndroidDatabaseManager" />
+        <activity android:name=".AndroidDatabaseManager" >
+        </activity>
         <activity
             android:name=".TestWS"
-            android:label="@string/title_activity_test_ws" >    
+            android:label="@string/title_activity_test_ws" >
         </activity>
 
         <meta-data
@@ -147,7 +146,14 @@
         <activity
             android:name=".TwitterActivity"
             android:label="@string/title_activity_twitter" >
-             
+        </activity>
+        <activity
+            android:name=".WebService"
+            android:label="Verification" >
+        </activity>
+        <activity
+            android:name=".FraudActivity"
+            android:label="@string/title_activity_fraud" >
         </activity>
     </application>
 

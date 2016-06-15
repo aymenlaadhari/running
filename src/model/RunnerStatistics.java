@@ -1,6 +1,10 @@
 package model;
 
+
+
+
 import java.util.Date;
+
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -18,6 +22,8 @@ public class RunnerStatistics {
 	private String time;
 	@DatabaseField
 	private double distance;
+	@DatabaseField
+	private String note;
 	@DatabaseField(foreign = true, foreignAutoRefresh = true)
 	private Runner runner;
 	
@@ -30,7 +36,7 @@ public class RunnerStatistics {
 	
 
 	public RunnerStatistics(int statisticsID, Date runningDate,
-			double calories, double speed, String time, double distance,
+			double calories, double speed, String time, double distance,String note,
 			Runner runner) {
 		super();
 		this.statisticsID = statisticsID;
@@ -39,6 +45,7 @@ public class RunnerStatistics {
 		this.speed = speed;
 		this.time = time;
 		this.distance = distance;
+		this.note = note;
 		this.runner = runner;
 	}
 
@@ -91,6 +98,19 @@ public class RunnerStatistics {
 	public void setDistance(double distance) {
 		this.distance = distance;
 	}
+	
+
+	public String getNote() {
+		return note;
+	}
+
+
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+
 
 	public Runner getRunner() {
 		return runner;

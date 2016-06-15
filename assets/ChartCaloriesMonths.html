@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>chart created with amCharts | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="http://cdn.amcharts.com/lib/3/serial.js"></script>
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"pathToImages": "http://cdn.amcharts.com/lib/3/images/",
+					"categoryField": "category",
+					"startDuration": 1,
+					"categoryAxis": {
+						"gridPosition": "start"
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonColor": "#FF8000",
+							"colorField": "color",
+							"fillAlphas": 0.45,
+							"fillColors": "#FF0000",
+							"id": "AmGraph-1",
+							"lineAlpha": 0,
+							"lineColorField": "color",
+							"title": "graph 1",
+							"type": "column",
+							"valueField": "column-1"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "K.Cal"
+						}
+					],
+					"allLabels": [],
+					"balloon": {},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Calories Burned"
+						}
+					],
+					"dataProvider": [
+						{
+							"category": "January",
+							"column-1": 8
+						},
+						{
+							"category": "February",
+							"column-1": 16
+						},
+						{
+							"category": "Mars",
+							"column-1": 2
+						},
+						{
+							"category": "April",
+							"column-1": 7
+						},
+						{
+							"category": "May",
+							"column-1": 5
+						},
+						{
+							"category": "June",
+							"column-1": 9
+						},
+						{
+							"category": "July",
+							"column-1": 9
+						},
+						{
+							"category": "August",
+							"column-1": 9
+						},
+						{
+							"category": "September",
+							"column-1": 9
+						},
+						{
+							"category": "October",
+							"column-1": 9
+						},
+						{
+							"category": "November",
+							"column-1": 9
+						},
+						{
+							"category": "December",
+							"column-1": 4
+						}
+					]
+				}
+			);
+		</script>
+	</head>
+	<body>
+		<div id="chartdiv" style="width: 780px; height: 250px; background-color: transparent;" ></div>
+	</body>
+</html>

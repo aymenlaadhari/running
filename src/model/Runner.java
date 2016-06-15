@@ -26,7 +26,7 @@ public class Runner implements Serializable {
 	@DatabaseField
 	private int heigh;
 	@DatabaseField
-	private int weight;
+	private float weight;
 	@DatabaseField(columnName = FB_FIELD)
 	private String fbID;
 	@DatabaseField
@@ -105,11 +105,11 @@ public class Runner implements Serializable {
 		this.heigh = heigh;
 	}
 
-	public int getWeight() {
+	public float getWeight() {
 		return weight;
 	}
 
-	public void setWeight(int weight) {
+	public void setWeight(float weight) {
 		this.weight = weight;
 	}
 

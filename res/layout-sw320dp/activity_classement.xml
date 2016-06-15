@@ -68,8 +68,9 @@
         android:layout_alignTop="@+id/imageView5"
         android:layout_margin="1dp"
         android:gravity="center"
-        android:text="votre classement est : "
-        android:textColor="@color/text" />
+        android:text="Votre classement est : "
+        android:textColor="@color/text"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/gangnant3Text"
@@ -81,7 +82,6 @@
         android:layout_alignTop="@+id/imageView4"
         android:layout_margin="1dp"
         android:gravity="center"
-        android:text="12km"
         android:textColor="@color/textChonometer" />
 
     <TextView
@@ -94,7 +94,6 @@
         android:layout_alignTop="@+id/imageView3"
         android:layout_margin="1dp"
         android:gravity="center"
-        android:text="20km"
         android:textColor="@color/textChonometer" />
 
     <TextView
@@ -107,9 +106,7 @@
         android:layout_alignTop="@+id/imageView2"
         android:layout_margin="1dp"
         android:gravity="center"
-        android:text="30km"
         android:textColor="@color/textChonometer" />
-    
 
     <TextView
         android:id="@+id/textClassementTop"
@@ -122,7 +119,8 @@
         android:layout_margin="1dp"
         android:gravity="center"
         android:text="Classement"
-        android:textColor="@color/text" />
+        android:textColor="@color/text"
+        android:textSize="20sp" />
 
     <TextView
         android:id="@+id/textView1"
@@ -130,8 +128,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/gagnant1Text"
         android:layout_alignBottom="@+id/gagnant1Text"
-        android:layout_alignLeft="@+id/imageView1"
-        android:layout_marginLeft="17dp"
+        android:layout_marginLeft="20dp"
         android:text="1er gagnant"
         android:textColor="@color/textChonometer" />
 
@@ -141,7 +138,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/gangnant3Text"
         android:layout_alignBottom="@+id/gangnant3Text"
-        android:layout_alignLeft="@+id/textView2"
+        android:layout_marginLeft="20dp"
         android:text="3eme gagnant"
         android:textColor="@color/textChonometer" />
 
@@ -151,7 +148,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/gagnant2Text"
         android:layout_alignBottom="@+id/gagnant2Text"
-        android:layout_alignLeft="@+id/textView1"
+        android:layout_marginLeft="20dp"
         android:text="2eme gagnant"
         android:textColor="@color/textChonometer" />
 

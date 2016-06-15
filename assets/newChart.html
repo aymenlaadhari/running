@@ -1,0 +1,22 @@
+<html>
+  <head> 
+    <script type="text/javascript" src="http://local.chifco.com/Scripts/amCharts/amcharts.js"></script>
+	<script type="text/javascript" src="http://local.chifco.com/Scripts/amCharts/serial.js"></script>
+	<script type="text/javascript" src="http://local.chifco.com/Scripts/chartUtilities.js"></script>
+
+  </head> 
+  <BODY>  
+ <div id="chartdiv" style="width: 95%; height: 300px;"></div>
+ 
+ 	<script type="text/javascript">
+	var IsLine;
+	var str = '%DATA%';
+	var data = JSON.parse(str);
+	
+var path= "http://local.chifco.com/content/images/sensorProperties/ColoredProperties/";
+if(IsLine)
+drawAmLineChart(data,"chartdiv","bottom", false,path);
+else
+drawAmBarChart(data,"chartdiv","bottom");
+
+  </script>
